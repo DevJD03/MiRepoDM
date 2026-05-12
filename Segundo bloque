@@ -1,0 +1,171 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/DevJD03/MiRepoDM/blob/main/Segundo%20bloque\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Second Block"
+      ],
+      "metadata": {
+        "id": "nJ5fFGUQIfnO"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "class Personaje:\n",
+        "\n",
+        "    CLASES_VALIDAS = ['Guerrero', 'Mago', 'Arquero']\n",
+        "\n",
+        "    def __init__(self, nombre, clase,\n",
+        "                 vida_max, ataque, defensa):\n",
+        "\n",
+        "        self.__nombre = nombre\n",
+        "        self.__nivel = 1\n",
+        "        self.__vida_maxima = vida_max\n",
+        "        self.__ataque = ataque\n",
+        "        self.__defensa = defensa\n",
+        "        self.__vida = vida_max\n",
+        "        self.clase = clase\n",
+        "\n",
+        "    @property\n",
+        "    def nombre(self):\n",
+        "        return self.__nombre\n",
+        "\n",
+        "    @property\n",
+        "    def nivel(self):\n",
+        "        return self.__nivel\n",
+        "\n",
+        "    @nivel.setter\n",
+        "    def nivel(self, n):\n",
+        "\n",
+        "        if n < 1:\n",
+        "            self.__nivel = 1\n",
+        "        elif n > 50:\n",
+        "            self.__nivel = 50\n",
+        "        else:\n",
+        "            self.__nivel = n\n",
+        "\n",
+        "    @property\n",
+        "    def vida(self):\n",
+        "        return self.__vida\n",
+        "\n",
+        "    @property\n",
+        "    def ataque(self):\n",
+        "        return self.__ataque\n",
+        "\n",
+        "    @property\n",
+        "    def defensa(self):\n",
+        "        return self.__defensa\n",
+        "\n",
+        "    @vida.setter\n",
+        "    def vida(self, v):\n",
+        "\n",
+        "        if v < 0:\n",
+        "            self.__vida = 0\n",
+        "        elif v > self.__vida_maxima:\n",
+        "            self.__vida = self.__vida_maxima\n",
+        "        else:\n",
+        "            self.__vida = v\n",
+        "\n",
+        "    @property\n",
+        "    def clase(self):\n",
+        "        return self.__clase\n",
+        "\n",
+        "    @clase.setter\n",
+        "    def clase(self, c):\n",
+        "\n",
+        "        if c in self.CLASES_VALIDAS:\n",
+        "            self.__clase = c\n",
+        "        else:\n",
+        "            print(f'Clase invalida: {c}')\n",
+        "            self.__clase = 'Guerrero'\n",
+        "\n",
+        "    def recibir_dano(self, dano: int):\n",
+        "\n",
+        "        dano_real = max(1, dano - self.__defensa)\n",
+        "\n",
+        "        self.vida -= dano_real\n",
+        "\n",
+        "        print(f'{self.__nombre} recibe {dano_real}'\n",
+        "              f' de dano. HP:{self.__vida:.0f}')\n",
+        "\n",
+        "    def curar(self, cantidad: float):\n",
+        "\n",
+        "        self.vida += cantidad\n",
+        "\n",
+        "        print(f'{self.__nombre} curado.'\n",
+        "              f' HP:{self.__vida:.0f}'\n",
+        "              f'/{self.__vida_maxima:.0f}')\n",
+        "\n",
+        "    def esta_vivo(self) -> bool:\n",
+        "\n",
+        "        return self.__vida > 0\n",
+        "\n",
+        "\n",
+        "g = Personaje('Aragorn', 'Guerrero', 100, 18, 12)\n",
+        "\n",
+        "g.nivel = 0\n",
+        "print(g.nivel)\n",
+        "\n",
+        "g.nivel = 75\n",
+        "print(g.nivel)\n",
+        "\n",
+        "g.nivel = 10\n",
+        "print(g.nivel)\n",
+        "\n",
+        "g.recibir_dano(25)\n",
+        "\n",
+        "g.curar(10)\n",
+        "\n",
+        "print(g.esta_vivo())"
+      ],
+      "metadata": {
+        "id": "DG2ag5B5I6bm",
+        "outputId": "6dcea1e2-7d1c-4229-c438-884af88cebef",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "1\n",
+            "50\n",
+            "10\n",
+            "Aragorn recibe 13 de dano. HP:87\n",
+            "Aragorn curado. HP:97/100\n",
+            "True\n"
+          ]
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "Te damos la bienvenida a Colab",
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
